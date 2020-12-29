@@ -5,7 +5,6 @@ import io.reactivex.Observable
 import io.reactivex.rxkotlin.toObservable
 
 
-
 class TimerOperatorUseCase(private val timerOperatorRepository: TimerOperatorRepository) {
 
     sealed class Result {
@@ -15,11 +14,10 @@ class TimerOperatorUseCase(private val timerOperatorRepository: TimerOperatorRep
     }
 
     fun execute(): Observable<Result> {
-        return Observable.just(timerOperatorRepository.getUpdatedString())
+        return timerOperatorRepository.getUpdatedString()
             .map {
-                it.also { print(it) }
-                Result.Success(it.toString())}
-
-
+                it.also { println(it) }
+                Result.Success(it.toString().toUpperCase())
+            }.toObservable()
     }
 }
