@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.example.sampleproject.R
 import com.example.sampleproject.databinding.ActivityMainBinding
 
@@ -18,7 +18,8 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil
             .setContentView(this, R.layout.activity_main)
 
-        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         viewModel.testString.observe(this, Observer { newText ->
             binding.test.text = newText.toString()
@@ -30,6 +31,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.button.setOnClickListener {
             viewModel.callApi()
+        }
+
+        binding.buttonSum.setOnClickListener {
+            viewModel.getResult(binding.editTextTextFirstNumber.text.toString(), binding.editTextTextSecondNumber.text.toString())
         }
 
     }

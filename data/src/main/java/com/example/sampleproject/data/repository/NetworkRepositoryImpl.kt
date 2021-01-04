@@ -8,6 +8,4 @@ class NetworkRepositoryImpl() : NetworkRepository {
 //        return apiInterface.getApi() Need to inject the api interface
         return "Success"
     }
-
-
 }
